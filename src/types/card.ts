@@ -9,6 +9,7 @@ export type CardType = 'MINION' | 'HERO' | 'HERO_POWER' | 'ENCHANTMENT'
 export interface BaseCard {
   cardClass: CardClass,
   dbfId: number,
+  hideCost?: boolean,
   id: string,
   name: string,
   set: CardSet,

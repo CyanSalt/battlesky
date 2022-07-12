@@ -11,6 +11,7 @@
     "lint": "npm run lint:script && npm run lint:style"
   },
   "dependencies": {
+    "lodash-es": "^4.17.21",
     "pinia": "^2.0.15",
     "vue": "^3.2.37"
   },

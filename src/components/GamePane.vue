@@ -2,6 +2,7 @@
 import { useDummyStore } from '../store/dummy'
 import { usePlayerStore } from '../store/player'
 import HeroArea from './HeroArea.vue'
+import HeroSelect from './HeroSelect.vue'
 import MinionList from './MinionList.vue'
 
 const enemy = $(useDummyStore())
@@ -14,6 +15,7 @@ const player = $(usePlayerStore())
     <MinionList :model-value="enemy.minions" />
     <MinionList :model-value="player.minions" />
     <HeroArea v-if="player.hero && player.heroPower" :hero="player.hero" :hero-power="player.heroPower" />
+    <HeroSelect v-else :options="player.heroOptions" />
   </div>
 </template>
 
