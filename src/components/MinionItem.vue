@@ -11,7 +11,7 @@ const cssImageURL = $computed(() => `url('${imageURL}')`)
 </script>
 
 <template>
-  <div class="minion-item">
+  <div class="minion-item" :style="{ 'background-image': cssImageURL }">
     <div class="minion-attack">{{ modelValue.attack }}</div>
     <div class="minion-health">{{ modelValue.health }}</div>
   </div>
@@ -24,20 +24,6 @@ const cssImageURL = $computed(() => `url('${imageURL}')`)
   width: 6rem;
   height: 8rem;
   border: 4px solid gray;
-  color: white;
-  font-weight: bold;
-  font-size: 24px;
-  text-shadow:
-    -2px -2px 0 black,
-    0   -2px 0 black,
-    2px -2px 0 black,
-    2px  0   0 black,
-    2px  2px 0 black,
-    0    2px 0 black,
-    -2px  2px 0 black,
-    -2px  0   0 black;
-  /* stylelint-disable-next-line value-keyword-case */
-  background-image: v-bind(cssImageURL);
   background-position: center;
   background-size: 140%;
   background-repeat: no-repeat;

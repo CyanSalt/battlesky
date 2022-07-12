@@ -18,18 +18,6 @@ const { modelValue } = defineProps<{
 <style lang="scss" scoped>
 .hero-item {
   position: relative;
-  color: white;
-  font-weight: bold;
-  font-size: 24px;
-  text-shadow:
-    -2px -2px 0 black,
-    0   -2px 0 black,
-    2px -2px 0 black,
-    2px  0   0 black,
-    2px  2px 0 black,
-    0    2px 0 black,
-    -2px  2px 0 black,
-    -2px  0   0 black;
 }
 .hero-attack {
   position: absolute;

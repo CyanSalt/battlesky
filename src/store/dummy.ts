@@ -4,13 +4,13 @@ import { createHero, createHeroPower, createMinion } from '../utils/entity'
 
 export const useDummyStore = defineStore('dummy', () => {
   let hero = $ref(
-    createHero(getCard('TB_BaconShop_HERO_41')),
+    createHero(getCard(60212)),
   )
   let heroPower = $ref(
-    createHeroPower(getCard('TB_BaconShop_HP_046')),
+    createHeroPower(getCard(60216)),
   )
   let minions = $ref(
-    Array.from({ length: 7 }, () => createMinion(getCard('BT_010'))),
+    Array.from({ length: 7 }, () => createMinion(getCard(56393))),
   )
 
   return {

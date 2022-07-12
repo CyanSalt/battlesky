@@ -1,5 +1,5 @@
 .*cache
-/src/assets/cards.json
+/src/assets/cards.*.json
 
 # Logs
 logs

@@ -21,8 +21,17 @@ const player = $(usePlayerStore())
 
 <style lang="scss" scoped>
 .game-pane {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  text-shadow:
+    -2px -2px 0 black,
+    0   -2px 0 black,
+    2px -2px 0 black,
+    2px  0   0 black,
+    2px  2px 0 black,
+    0    2px 0 black,
+    -2px  2px 0 black,
+    -2px  0   0 black;
 }
 </style>

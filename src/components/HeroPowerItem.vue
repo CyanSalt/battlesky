@@ -11,8 +11,8 @@ const cssImageURL = $computed(() => `url('${imageURL}')`)
 </script>
 
 <template>
-  <div class="hero-power-item">
-    <div class="hero-power-cost">{{ modelValue.cost }}</div>
+  <div class="hero-power-item" :style="{ 'background-image': cssImageURL }">
+    <div class="hero-power-cost">{{ modelValue.hideCost ? '' : modelValue.cost }}</div>
   </div>
 </template>
 
@@ -23,20 +23,6 @@ const cssImageURL = $computed(() => `url('${imageURL}')`)
   width: 6rem;
   height: 6rem;
   border: 0.5em solid chocolate;
-  color: white;
-  font-weight: bold;
-  font-size: 24px;
-  text-shadow:
-    -2px -2px 0 black,
-    0   -2px 0 black,
-    2px -2px 0 black,
-    2px  0   0 black,
-    2px  2px 0 black,
-    0    2px 0 black,
-    -2px  2px 0 black,
-    -2px  0   0 black;
-  /* stylelint-disable-next-line value-keyword-case */
-  background-image: v-bind(cssImageURL);
   background-position: center;
   background-size: 130%;
   background-repeat: no-repeat;

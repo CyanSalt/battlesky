@@ -37,6 +37,7 @@ export interface HeroCard extends BaseCard {
   artist: string,
   battlegroundsSkinParentId?: number,
   battlegroundsBuddyDbfId?: number,
+  battlegroundsHeroPowerId?: number, // custom field
   battlegroundsHero?: boolean,
   health: number,
   type: 'HERO',

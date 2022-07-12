@@ -1,23 +1,46 @@
 <script lang="ts" setup>
+import { usePlayerStore } from '../store/player'
 import type { HeroCard } from '../types/card'
+import HearthButton from './HearthButton.vue'
 import HeroCardItem from './HeroCardItem.vue'
 
 const { options } = defineProps<{
   options: HeroCard[],
 }>()
+
+let { selectHero } = $(usePlayerStore())
+
+let selected = $ref<HeroCard | undefined>()
+
+function select(card: HeroCard) {
+  if (card.id === selected?.id) {
+    selected = undefined
+  } else {
+    selected = card
+  }
+}
+
+function confirm() {
+  if (!selected) return
+  selectHero(selected)
+}
 </script>
 
 <template>
   <div class="hero-select">
     <div class="hero-select-line">
       <HeroCardItem
-        v-for="hero in options"
-        :key="hero.id"
-        :model-value="hero"
+        v-for="card in options"
+        :key="card.id"
+        :model-value="card"
         with-name
+        :selected="card.id === selected?.id"
+        @click="select(card)"
       />
     </div>
-    <div class="confirm-button-line"></div>
+    <div class="confirm-button-line">
+      <HearthButton :disabled="!selected" @click="confirm">选择</HearthButton>
+    </div>
   </div>
 </template>
 
@@ -46,5 +69,6 @@ const { options } = defineProps<{
   left: 0;
   display: flex;
   justify-content: center;
+  margin-top: 1em;
 }
 </style>
