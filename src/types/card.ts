@@ -2,9 +2,9 @@ export type CardClass = 'NEUTRAL'
 export type Mechanic = 'BATTLECRY'
 export type Race = 'MURLOC'
 export type Rarity = 'COMMON'
-export type CardSet = 'BLACK_TEMPLE'
+export type CardSet = 'BATTLEGROUNDS' | 'BLACK_TEMPLE'
 export type TechLevel = 1 | 2 | 3 | 4 | 5 | 6
-export type CardType = 'MINION' | 'ENCHANTMENT'
+export type CardType = 'MINION' | 'HERO' | 'HERO_POWER' | 'ENCHANTMENT'
 
 export interface BaseCard {
   cardClass: CardClass,
@@ -12,7 +12,6 @@ export interface BaseCard {
   id: string,
   name: string,
   set: CardSet,
-  text: string,
   type: CardType,
 }
 
@@ -29,11 +28,28 @@ export interface MinionCard extends BaseCard {
   race: Race,
   rarity: Rarity,
   techLevel: TechLevel,
+  text: string,
   type: 'MINION',
 }
 
+export interface HeroCard extends BaseCard {
+  artist: string,
+  battlegroundsSkinParentId?: number,
+  battlegroundsBuddyDbfId?: number,
+  battlegroundsHero?: boolean,
+  health: number,
+  type: 'HERO',
+}
+
+export interface HeroPowerCard extends BaseCard {
+  cost: number,
+  text: string,
+  type: 'HERO_POWER',
+}
+
 export interface EnchantmentCard extends BaseCard {
+  text: string,
   type: 'ENCHANTMENT',
 }
 
-export type Card = MinionCard | EnchantmentCard
+export type Card = MinionCard | HeroCard | HeroPowerCard | EnchantmentCard

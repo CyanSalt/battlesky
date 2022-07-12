@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { Minion } from '../types/entity'
+import type { HeroPower } from '../types/entity'
 import { getEntityImageURL } from '../utils/entity'
 
 const { modelValue } = defineProps<{
-  modelValue: Minion,
+  modelValue: HeroPower,
 }>()
 
 const imageURL = $computed(() => getEntityImageURL(modelValue.id))
@@ -11,19 +11,18 @@ const cssImageURL = $computed(() => `url('${imageURL}')`)
 </script>
 
 <template>
-  <div class="minion-item">
-    <div class="minion-attack">{{ modelValue.attack }}</div>
-    <div class="minion-health">{{ modelValue.health }}</div>
+  <div class="hero-power-item">
+    <div class="hero-power-cost">{{ modelValue.cost }}</div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.minion-item {
+.hero-power-item {
   position: relative;
   box-sizing: border-box;
   width: 6rem;
-  height: 8rem;
-  border: 4px solid gray;
+  height: 6rem;
+  border: 0.5em solid chocolate;
   color: white;
   font-weight: bold;
   font-size: 24px;
@@ -39,34 +38,21 @@ const cssImageURL = $computed(() => `url('${imageURL}')`)
   /* stylelint-disable-next-line value-keyword-case */
   background-image: v-bind(cssImageURL);
   background-position: center;
-  background-size: 140%;
+  background-size: 130%;
   background-repeat: no-repeat;
   border-radius: 50%;
-  box-shadow: 0 0 2px 2px black, 0 0 2px 2px black inset;
+  box-shadow: 0 0 4px 4px black, 0 0 4px 4px black inset;
 }
-.minion-attack {
+.hero-power-cost {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 1em;
-  height: 1em;
+  top: -0.8em;
+  left: calc(50% - 0.6em - 1px);
+  width: 1.2em;
+  height: 1.2em;
   border: 2px solid black;
-  line-height: 1em;
+  line-height: 1.2em;
   text-align: center;
-  background-color: yellow;
-  border-radius: 50%;
-  box-shadow: 0 0 2px 0 black, 0 0 2px 0 white inset;
-}
-.minion-health {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 1em;
-  height: 1em;
-  border: 2px solid black;
-  line-height: 1em;
-  text-align: center;
-  background-color: red;
+  background-color: gold;
   border-radius: 50%;
   box-shadow: 0 0 2px 0 black, 0 0 2px 0 white inset;
 }
