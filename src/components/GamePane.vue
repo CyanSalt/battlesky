@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { watchEffect } from 'vue'
 import { useBobStore } from '../store/bob'
 import { useDummyStore } from '../store/dummy'
 import { useGameStore } from '../store/game'
@@ -8,10 +9,14 @@ import HeroSelect from './HeroSelect.vue'
 import MinionList from './MinionList.vue'
 import TavernArea from './TavernArea.vue'
 
-const { isInCombat } = $(useGameStore())
+const { isInCombat, selectRaces } = $(useGameStore())
 const enemy = $(useDummyStore())
 const player = $(usePlayerStore())
 const bob = $(useBobStore())
+
+watchEffect(() => {
+  selectRaces()
+})
 </script>
 
 <template>

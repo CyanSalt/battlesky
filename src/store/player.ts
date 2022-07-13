@@ -2,8 +2,9 @@ import { sampleSize } from 'lodash-es'
 import { defineStore } from 'pinia'
 import type { HeroCard } from '../types/card'
 import type { Hero, HeroPower, Minion } from '../types/entity'
-import { allCards, getCard, getSkinParentCard } from '../utils/card'
+import { ALL_HERO_CARDS, getCard, getSkinParentCard } from '../utils/card'
 import { createHero, createHeroPower } from '../utils/entity'
+import { useGameStore } from './game'
 
 export interface Player {
   hero: Hero,
@@ -17,20 +18,14 @@ export const usePlayerStore = defineStore('player', () => {
   let heroPower = $ref<HeroPower | undefined>()
   let minions = $ref<Minion[]>([])
   let heroOptions = $ref<HeroCard[]>(
-    sampleSize(allCards.filter((item): item is HeroCard => {
-      return item.type === 'HERO'
-        && item.set === 'BATTLEGROUNDS'
-        && !item.hideCost
-        && !item.hideStats
-        && Boolean(getSkinParentCard(item).battlegroundsHero)
-    }), 4),
+    sampleSize(ALL_HERO_CARDS, 4),
   )
 
   function selectHero(selected: HeroCard) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { startGame } = $(useGameStore())
     hero = createHero(selected)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     heroPower = createHeroPower(getCard(getSkinParentCard(selected).battlegroundsHeroPowerId!))
+    startGame()
   }
 
   return {

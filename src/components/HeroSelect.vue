@@ -39,7 +39,7 @@ function confirm() {
       />
     </div>
     <div class="confirm-button-line">
-      <HearthButton :disabled="!selected" @click="confirm">选择</HearthButton>
+      <HearthButton :disabled="!selected" @click="confirm">确认</HearthButton>
     </div>
   </div>
 </template>

@@ -1,29 +1,39 @@
 import { sample, sampleSize } from 'lodash-es'
 import { defineStore } from 'pinia'
-import type { HeroCard } from '../types/card'
+import { watchEffect } from 'vue'
 import type { Minion } from '../types/entity'
-import { allCards } from '../utils/card'
-import { createHero } from '../utils/entity'
+import { ALL_BOB_CARDS, ALL_MINION_CARDS, getRaceGroup } from '../utils/card'
+import { createHero, createMinion } from '../utils/entity'
+import { useGameStore } from './game'
+import { usePlayerStore } from './player'
 
-const MINION_COUNT = [3, 4, 4, 5, 5, 6]
+const MINION_SEAT_COUNT = [3, 4, 4, 5, 5, 6]
+const MINION_COUNT = [15, 15, 13, 11, 9, 7]
 
 export const useBobStore = defineStore('bob', () => {
   let hero = $ref(
     createHero(
-      sample(allCards.filter((item): item is HeroCard => {
-        return item.type === 'HERO'
-          && item.set === 'BATTLEGROUNDS'
-          && Boolean(item.hideStats)
-      })),
+      sample(ALL_BOB_CARDS)!,
     ),
   )
   let minions = $ref<Minion[]>([])
 
   let pool = $ref<Minion[]>([])
 
-  function refreshTavern(techLevel: number) {
+  watchEffect(() => {
+    const { races } = $(useGameStore())
+    pool = ALL_MINION_CARDS.filter(card => {
+      const group = getRaceGroup(card)
+      return !group || races.includes(group)
+    }).flatMap(card => {
+      return Array.from({ length: MINION_COUNT[card.techLevel - 1] }, () => createMinion(card))
+    })
+  })
+
+  function refreshTavern() {
+    const { techLevel } = $(usePlayerStore())
     let newValue = minions.filter(minion => !minion.isDormant)
-    const count = MINION_COUNT[techLevel - 1]
+    const count = MINION_SEAT_COUNT[techLevel - 1]
     if (newValue.length < count) {
       newValue = newValue.concat(
         sampleSize(
@@ -35,9 +45,10 @@ export const useBobStore = defineStore('bob', () => {
     minions = newValue
   }
 
-  function refreshUnfrozenTavern(techLevel: number) {
+  function refreshUnfrozenTavern() {
+    const { techLevel } = $(usePlayerStore())
     let newValue = minions.filter(minion => !minion.isFrozen && !minion.isDormant)
-    const count = MINION_COUNT[techLevel - 1]
+    const count = MINION_SEAT_COUNT[techLevel - 1]
     if (newValue.length < count) {
       newValue = newValue.concat(
         sampleSize(

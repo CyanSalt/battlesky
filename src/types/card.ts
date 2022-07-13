@@ -1,6 +1,6 @@
 export type CardClass = 'NEUTRAL'
 export type Mechanic = 'BATTLECRY'
-export type Race = 'MURLOC'
+export type Race = 'ALL' | 'BEAST' | 'DEMON' | 'MECHANICAL' | 'MURLOC' | 'PIRATE' | 'DRAGON' | 'ELEMENTAL' | 'QUILBOAR' | 'NAGA'
 export type Rarity = 'COMMON'
 export type CardSet = 'BATTLEGROUNDS' | 'BLACK_TEMPLE'
 export type TechLevel = 1 | 2 | 3 | 4 | 5 | 6
@@ -20,14 +20,15 @@ export interface BaseCard {
 export interface MinionCard extends BaseCard {
   artist: string,
   attack: number,
-  battlegroundsPremiumDbfId: number,
+  battlegroundsNormalDbfId?: number,
+  battlegroundsPremiumDbfId?: number,
   collectible: boolean,
   cost: number,
   flavor: string,
   health: number,
-  isBattlegroundsPoolMinion: true,
+  isBattlegroundsPoolMinion?: boolean,
   mechanics: Mechanic[],
-  race: Race,
+  race?: Race,
   rarity: Rarity,
   techLevel: TechLevel,
   text: string,
