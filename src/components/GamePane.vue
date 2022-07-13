@@ -1,26 +1,45 @@
 <script lang="ts" setup>
+import { useBobStore } from '../store/bob'
 import { useDummyStore } from '../store/dummy'
+import { useGameStore } from '../store/game'
 import { usePlayerStore } from '../store/player'
 import HeroArea from './HeroArea.vue'
 import HeroSelect from './HeroSelect.vue'
 import MinionList from './MinionList.vue'
+import TavernArea from './TavernArea.vue'
 
+const { isInCombat } = $(useGameStore())
 const enemy = $(useDummyStore())
 const player = $(usePlayerStore())
+const bob = $(useBobStore())
 </script>
 
 <template>
   <div class="game-pane">
-    <HeroArea :hero="enemy.hero" :hero-power="enemy.heroPower" />
-    <MinionList :model-value="enemy.minions" />
-    <MinionList :model-value="player.minions" />
-    <HeroArea v-if="player.hero && player.heroPower" :hero="player.hero" :hero-power="player.heroPower" />
-    <HeroSelect v-else :options="player.heroOptions" />
+    <div class="player-area is-enemy">
+      <template v-if="isInCombat">
+        <HeroArea :hero="enemy.hero" :hero-power="enemy.heroPower" />
+        <MinionList :model-value="enemy.minions" />
+      </template>
+      <template v-else>
+        <TavernArea />
+        <MinionList :model-value="bob.minions" />
+      </template>
+    </div>
+    <div class="player-area is-player">
+      <MinionList :model-value="player.minions" />
+      <HeroArea v-if="player.hero" :hero="player.hero" :hero-power="player.heroPower" />
+    </div>
+    <HeroSelect v-if="!player.hero" :options="player.heroOptions" />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .game-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  height: 100vh;
   color: white;
   font-weight: bold;
   font-size: 24px;
@@ -33,5 +52,18 @@ const player = $(usePlayerStore())
     0    2px 0 black,
     -2px  2px 0 black,
     -2px  0   0 black;
+  background-color: lightyellow;
+}
+.player-area {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1em;
+  &.is-enemy {
+    justify-content: flex-end;
+  }
+  &.is-player {
+    justify-content: flex-start;
+  }
 }
 </style>

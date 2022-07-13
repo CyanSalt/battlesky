@@ -5,3 +5,9 @@ import GamePane from './components/GamePane.vue'
 <template>
   <GamePane />
 </template>
+
+<style lang="scss" scoped>
+:global(body) {
+  margin: 0;
+}
+</style>

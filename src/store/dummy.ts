@@ -3,6 +3,7 @@ import { getCard } from '../utils/card'
 import { createHero, createHeroPower, createMinion } from '../utils/entity'
 
 export const useDummyStore = defineStore('dummy', () => {
+  let techLevel = $ref(1)
   let hero = $ref(
     createHero(getCard(60212)),
   )
@@ -14,6 +15,7 @@ export const useDummyStore = defineStore('dummy', () => {
   )
 
   return {
+    techLevel: $$(techLevel),
     hero: $$(hero),
     heroPower: $$(heroPower),
     minions: $$(minions),

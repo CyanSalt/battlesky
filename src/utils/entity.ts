@@ -27,7 +27,6 @@ export function createHero(card: HeroCard): Hero {
   return {
     ...card,
     entityId: generateEntityID(),
-    attack: 0,
   }
 }
 

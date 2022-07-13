@@ -5,10 +5,11 @@ export interface BaseEntity {
 }
 
 export interface Minion extends MinionCard, BaseEntity {
+  isFrozen?: boolean,
+  isDormant?: boolean,
 }
 
 export interface Hero extends HeroCard, BaseEntity {
-  attack: number,
 }
 
 export interface HeroPower extends HeroPowerCard, BaseEntity {

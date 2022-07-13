@@ -12,6 +12,7 @@ export interface Player {
 }
 
 export const usePlayerStore = defineStore('player', () => {
+  let techLevel = $ref(1)
   let hero = $ref<Hero | undefined>()
   let heroPower = $ref<HeroPower | undefined>()
   let minions = $ref<Minion[]>([])
@@ -20,6 +21,7 @@ export const usePlayerStore = defineStore('player', () => {
       return item.type === 'HERO'
         && item.set === 'BATTLEGROUNDS'
         && !item.hideCost
+        && !item.hideStats
         && Boolean(getSkinParentCard(item).battlegroundsHero)
     }), 4),
   )
@@ -32,6 +34,7 @@ export const usePlayerStore = defineStore('player', () => {
   }
 
   return {
+    techLevel: $$(techLevel),
     hero: $$(hero),
     heroPower: $$(heroPower),
     minions: $$(minions),

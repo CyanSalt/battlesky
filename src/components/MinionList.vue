@@ -22,5 +22,6 @@ const { modelValue } = defineProps<{
   display: flex;
   gap: 1rem;
   justify-content: center;
+  height: 8rem;
 }
 </style>

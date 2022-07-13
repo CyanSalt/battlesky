@@ -10,6 +10,7 @@ export interface BaseCard {
   cardClass: CardClass,
   dbfId: number,
   hideCost?: boolean,
+  hideStats?: boolean,
   id: string,
   name: string,
   set: CardSet,

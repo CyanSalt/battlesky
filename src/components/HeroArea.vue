@@ -5,14 +5,15 @@ import HeroPowerItem from './HeroPowerItem.vue'
 
 const { hero, heroPower } = defineProps<{
   hero: Hero,
-  heroPower: HeroPower,
+  heroPower?: HeroPower,
+  isBob?: boolean,
 }>()
 </script>
 
 <template>
   <div class="hero-area">
     <HeroItem :model-value="hero" />
-    <HeroPowerItem :model-value="heroPower" />
+    <HeroPowerItem v-if="heroPower" :model-value="heroPower" />
   </div>
 </template>
 

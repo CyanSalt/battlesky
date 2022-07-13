@@ -10,8 +10,8 @@ const { modelValue } = defineProps<{
 <template>
   <div class="hero-item">
     <HeroCardItem :model-value="modelValue" />
-    <div class="hero-attack">{{ modelValue.attack }}</div>
-    <div class="hero-health">{{ modelValue.health }}</div>
+    <div v-if="!modelValue.hideStats" class="hero-attack">{{ 0 }}</div>
+    <div v-if="!modelValue.hideStats" class="hero-health">{{ modelValue.health }}</div>
   </div>
 </template>
 
